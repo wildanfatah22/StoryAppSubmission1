@@ -11,6 +11,10 @@ import java.util.regex.Pattern
 
 class CustomEmailEditText: TextInputEditText {
 
+    var isEmailValid = false
+    private lateinit var emailSame: String
+    private var isEmailHasTaken = false
+
     private val emailInputLayout: TextInputLayout? by lazy {
         findTextInputLayoutAncestor()
     }
@@ -31,6 +35,9 @@ class CustomEmailEditText: TextInputEditText {
         addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 validateEmail(s.toString())
+                if (isEmailHasTaken) {
+                    validateEmailHasTaken()
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -56,6 +63,14 @@ class CustomEmailEditText: TextInputEditText {
         val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
         val pattern = Pattern.compile(emailPattern)
         return pattern.matcher(email).matches()
+    }
+
+    private fun validateEmailHasTaken() {
+        error = if (isEmailHasTaken && text.toString().trim() == emailSame) {
+            resources.getString(R.string.email_taken)
+        } else {
+            null
+        }
     }
 
     private fun findTextInputLayoutAncestor(): TextInputLayout? {

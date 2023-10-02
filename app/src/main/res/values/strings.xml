@@ -12,16 +12,19 @@
     <string name="app">App</string>
 
 
-    <string name="email_format">Wrong email format</string>
-
-    <string name="password_format">Password must be at least 8 characters</string>
-
     <string name="name_none">Name cannot be empty</string>
+
+    <string name="email_format">Wrong email format</string>
+    <string name="email_taken">The email you entered is already registered, please change your email</string>
     <string name="email_none">Email cannot be empty</string>
+
     <string name="password_none">Password cannot be empty</string>
+    <string name="password_format">Password must be at least 8 characters</string>
 
 
     <string name="login_success_message">Hello %1$s!</string>
+    <string name="login_invalid">Enter your account data correctly!</string>
+
     <string name="incorrect_credentials_message">The email or password you entered is incorrect, please try again</string>
     <string name="slow_internet_message">Your internet connection is slow, please try again</string>
     <string name="bottom_splash_text">Submission Intermediate Android Application Development</string>

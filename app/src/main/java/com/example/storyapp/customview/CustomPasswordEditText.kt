@@ -9,6 +9,8 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 class CustomPasswordEditText: TextInputEditText {
+    var isPasswordValid: Boolean = false
+
     private val passwordInputLayout: TextInputLayout? by lazy {
         findTextInputLayoutAncestor()
     }
