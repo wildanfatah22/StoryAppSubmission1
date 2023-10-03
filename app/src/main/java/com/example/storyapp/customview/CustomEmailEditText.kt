@@ -4,12 +4,17 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.util.Patterns
 import com.example.storyapp.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.util.regex.Pattern
 
 class CustomEmailEditText: TextInputEditText {
+
+    var isEmailValid = false
+    private lateinit var emailSame: String
+    private var isEmailHasTaken = false
 
     private val emailInputLayout: TextInputLayout? by lazy {
         findTextInputLayoutAncestor()
@@ -30,7 +35,10 @@ class CustomEmailEditText: TextInputEditText {
         // Tambahkan TextWatcher untuk validasi format email
         addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                validateEmail(s.toString())
+                validateEmail()
+                if (isEmailHasTaken) {
+                    validateEmailHasTaken()
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -43,12 +51,19 @@ class CustomEmailEditText: TextInputEditText {
         })
     }
 
-    private fun validateEmail(email: String) {
-        val emailInputLayout = findTextInputLayoutAncestor()
-        if (!isValidEmail(email)) {
-            emailInputLayout?.error = resources.getString(R.string.email_format)
+    private fun validateEmail() {
+//        val emailInputLayout = findTextInputLayoutAncestor()
+//        if (!isValidEmail(email)) {
+//            emailInputLayout?.error = resources.getString(R.string.email_format)
+//        } else {
+//            emailInputLayout?.error = null
+//        }
+
+        isEmailValid = Patterns.EMAIL_ADDRESS.matcher(text.toString().trim()).matches()
+        error = if (!isEmailValid) {
+            resources.getString(R.string.email_format)
         } else {
-            emailInputLayout?.error = null
+            null
         }
     }
 
@@ -56,6 +71,14 @@ class CustomEmailEditText: TextInputEditText {
         val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
         val pattern = Pattern.compile(emailPattern)
         return pattern.matcher(email).matches()
+    }
+
+    private fun validateEmailHasTaken() {
+        error = if (isEmailHasTaken && text.toString().trim() == emailSame) {
+            resources.getString(R.string.email_taken)
+        } else {
+            null
+        }
     }
 
     private fun findTextInputLayoutAncestor(): TextInputLayout? {
@@ -67,5 +90,15 @@ class CustomEmailEditText: TextInputEditText {
             parent = parent.parent
         }
         return null
+    }
+
+    fun setMessage(message: String, email: String) {
+        emailSame = email
+        isEmailHasTaken = true
+        error = if (text.toString().trim() == emailSame) {
+            message
+        } else {
+            null
+        }
     }
 }
