@@ -6,24 +6,22 @@ import com.example.storyapp.data.api.ApiConfig
 import com.example.storyapp.data.api.ApiService
 import com.example.storyapp.data.response.LoginAccount
 import com.example.storyapp.data.response.RegisterAccount
-import com.example.storyapp.data.response.ResponseDetail
-import com.example.storyapp.data.response.ResponseLogin
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-class UserRepository(private val apiService: ApiService) {
-
-    private val _message = MutableLiveData<String>()
-    val message: LiveData<String> = _message
-
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
-
-    private val _userLogin = MutableLiveData<ResponseLogin>()
-    var userlogin: LiveData<ResponseLogin> = _userLogin
-
+//
+//class UserRepository(private val apiService: ApiService) {
+//
+//    private val _message = MutableLiveData<String>()
+//    val message: LiveData<String> = _message
+//
+//    private val _isLoading = MutableLiveData<Boolean>()
+//    val isLoading: LiveData<Boolean> = _isLoading
+//
+//    private val _userLogin = MutableLiveData<ResponseLogin>()
+//    var userlogin: LiveData<ResponseLogin> = _userLogin
+//
 //    suspend fun getResponseLogin(loginAccount: LoginAccount) {
 //        _isLoading.value = true
 //        val api = ApiConfig.getApiService().userLogin(loginAccount)
@@ -84,6 +82,6 @@ class UserRepository(private val apiService: ApiService) {
 //
 //        })
 //    }
-
-
-}
+//
+//
+//}

@@ -3,7 +3,7 @@ package com.example.storyapp.data.response
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-data class ResponseDetail(
+data class DetailResponse(
 	var error: Boolean,
 	var message: String
 )
@@ -19,7 +19,7 @@ data class LoginAccount(
 	var password: String
 )
 
-data class ResponseLogin(
+data class LoginResponse(
 	var error: Boolean,
 	var message: String,
 	var loginResult: LoginResult
@@ -31,7 +31,7 @@ data class LoginResult(
 	var token: String
 )
 
-data class ResponseStory(
+data class StoryResponse(
 	var error: String,
 	var message: String,
 	var listStory: List<StoryDetail>

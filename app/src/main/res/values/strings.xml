@@ -23,11 +23,14 @@
 
 
     <string name="login_success_message">Hello %1$s!</string>
-    <string name="login_invalid">Enter your account data correctly!</string>
+
+    <string name="login_invalid">Is invalid!</string>
 
     <string name="incorrect_credentials_message">The email or password you entered is incorrect, please try again</string>
     <string name="slow_internet_message">Your internet connection is slow, please try again</string>
     <string name="bottom_splash_text">Submission Intermediate Android Application Development</string>
     <string name="storySplash">Tell your story!</string>
     <string name="bottomSplash">Midsubmission Dicoding</string>
+    <string name="date_content">October 03, 2023, 15:23:55</string>
+    <string name="description_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.util.Patterns
 import com.example.storyapp.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -34,7 +35,7 @@ class CustomEmailEditText: TextInputEditText {
         // Tambahkan TextWatcher untuk validasi format email
         addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                validateEmail(s.toString())
+                validateEmail()
                 if (isEmailHasTaken) {
                     validateEmailHasTaken()
                 }
@@ -50,12 +51,19 @@ class CustomEmailEditText: TextInputEditText {
         })
     }
 
-    private fun validateEmail(email: String) {
-        val emailInputLayout = findTextInputLayoutAncestor()
-        if (!isValidEmail(email)) {
-            emailInputLayout?.error = resources.getString(R.string.email_format)
+    private fun validateEmail() {
+//        val emailInputLayout = findTextInputLayoutAncestor()
+//        if (!isValidEmail(email)) {
+//            emailInputLayout?.error = resources.getString(R.string.email_format)
+//        } else {
+//            emailInputLayout?.error = null
+//        }
+
+        isEmailValid = Patterns.EMAIL_ADDRESS.matcher(text.toString().trim()).matches()
+        error = if (!isEmailValid) {
+            resources.getString(R.string.email_format)
         } else {
-            emailInputLayout?.error = null
+            null
         }
     }
 
@@ -82,5 +90,15 @@ class CustomEmailEditText: TextInputEditText {
             parent = parent.parent
         }
         return null
+    }
+
+    fun setMessage(message: String, email: String) {
+        emailSame = email
+        isEmailHasTaken = true
+        error = if (text.toString().trim() == emailSame) {
+            message
+        } else {
+            null
+        }
     }
 }

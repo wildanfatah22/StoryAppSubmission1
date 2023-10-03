@@ -4,11 +4,15 @@ import com.example.storyapp.data.api.ApiConfig
 import com.example.storyapp.data.api.ApiService
 import com.example.storyapp.data.response.LoginAccount
 import com.example.storyapp.data.response.RegisterAccount
-import com.example.storyapp.data.response.ResponseDetail
-import com.example.storyapp.data.response.ResponseLogin
+import retrofit2.Response
 import java.lang.Exception
 
+/**
 class MyRepository(private val apiService: ApiService) {
+
+    suspend fun loginUser(loginAccount: LoginAccount): Response<ResponseLogin> {
+        return  ApiConfig.getApiService().userLogin(loginAccount)
+    }
 
     suspend fun userRegister(registerAccount: RegisterAccount): ResponseDetail {
         return try {
@@ -27,16 +31,16 @@ class MyRepository(private val apiService: ApiService) {
 //        return apiService.userLogin(loginAccount)
 //    }
 
-    suspend fun userLogin(loginAccount: LoginAccount): ResponseDetail {
+    suspend fun userLogin(loginAccount: LoginAccount): ResponseLogin {
         return try {
             val response = ApiConfig.getApiService().userLogin(loginAccount)
             if (response.error) {
-                ResponseDetail(true, "Failed to login")
+                ResponseLogin(true, "Failed to login")
             } else {
-                ResponseDetail(false, "Login success!")
+                ResponseLogin(false, "Login success!")
             }
         } catch (e: Exception) {
-            ResponseDetail(true, "Error message: ${e.message}")
+            ResponseLogin(true, "Error message: ${e.message}")
         }
     }
-}
+}**/

@@ -10,10 +10,7 @@ import com.google.android.material.textfield.TextInputLayout
 
 class CustomPasswordEditText: TextInputEditText {
     var isPasswordValid: Boolean = false
-
-    private val passwordInputLayout: TextInputLayout? by lazy {
-        findTextInputLayoutAncestor()
-    }
+    
 
     constructor(context: Context) : super(context) {
         init()
@@ -28,7 +25,7 @@ class CustomPasswordEditText: TextInputEditText {
     private fun init() {
         addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                validatePassword(s.toString())
+
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -36,28 +33,26 @@ class CustomPasswordEditText: TextInputEditText {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Do nothing
+                validatePassword()
             }
         })
     }
 
-    private fun findTextInputLayoutAncestor(): TextInputLayout? {
-        var parent = parent
-        while (parent != null) {
-            if (parent is TextInputLayout) {
-                return parent
-            }
-            parent = parent.parent
-        }
-        return null
-    }
 
-    private fun validatePassword(password: String) {
-        val passwordInputLayout = findTextInputLayoutAncestor()
-        if (password.length < 8) {
-            passwordInputLayout?.error = resources.getString(R.string.password_format)
+
+    private fun validatePassword() {
+//        val passwordInputLayout = findTextInputLayoutAncestor()
+//        if (password.length < 8) {
+//            passwordInputLayout?.error = resources.getString(R.string.password_format)
+//        } else {
+//            passwordInputLayout?.error = null
+//        }
+
+        isPasswordValid = (text?.length ?: 0) >= 8
+        error = if (!isPasswordValid) {
+            resources.getString(R.string.password_format)
         } else {
-            passwordInputLayout?.error = null
+            null
         }
     }
 
