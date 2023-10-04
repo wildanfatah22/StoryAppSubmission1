@@ -12,8 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Response
+
 
 
 class AuthViewModel : ViewModel() {
@@ -35,18 +34,23 @@ class AuthViewModel : ViewModel() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    fun getResponseLogin(loginDataAccount: LoginAccount) {
+    fun getResponseLogin(loginAccount: LoginAccount) {
         _isLoadingLogin.value = true
-        val api = ApiConfig.getApiService().loginUser(loginDataAccount)
-        api.enqueue(object : retrofit2.Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+        coroutineScope.launch {
+            try {
+                val response = ApiConfig.getApiService().loginUser(loginAccount)
                 _isLoadingLogin.value = false
-                val responseBody = response.body()
 
                 if (response.isSuccessful) {
-                    isErrorLogin = false
-                    _userLogin.value = responseBody!!
-                    _messageLogin.value = "Halo ${_userLogin.value!!.loginResult.name}!"
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        isErrorLogin = false
+                        _userLogin.value = responseBody!!
+                        _messageLogin.value = "Halo ${_userLogin.value!!.loginResult.name}!"
+                    } else {
+                        isErrorLogin = true
+                        _messageLogin.value = "Response body is null"
+                    }
                 } else {
                     isErrorLogin = true
                     when (response.code()) {
@@ -57,29 +61,30 @@ class AuthViewModel : ViewModel() {
                         else -> _messageLogin.value = "Pesan error: " + response.message()
                     }
                 }
-            }
-
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+            } catch (e: Exception) {
                 isErrorLogin = true
                 _isLoadingLogin.value = false
-                _messageLogin.value = "Pesan error: " + t.message.toString()
+                _messageLogin.value = "Pesan error: " + e.message.toString()
             }
-
-        })
+        }
     }
 
     fun getResponseRegister(registDataUser: RegisterAccount) {
         _isLoadingRegister.value = true
-        val api = ApiConfig.getApiService().registerUser(registDataUser)
-        api.enqueue(object : retrofit2.Callback<DetailResponse> {
-            override fun onResponse(
-                call: Call<DetailResponse>,
-                response: Response<DetailResponse>
-            ) {
+        coroutineScope.launch {
+            try {
+                val response = ApiConfig.getApiService().registerUser(registDataUser)
                 _isLoadingRegister.value = false
+
                 if (response.isSuccessful) {
-                    isErrorRegister = false
-                    _messageRegister.value = "Yeay akun berhasil dibuat"
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        isErrorRegister = false
+                        _messageRegister.value = "Yeay akun berhasil dibuat"
+                    } else {
+                        isErrorRegister = true
+                        _messageRegister.value = "Response body is null"
+                    }
                 } else {
                     isErrorRegister = true
                     when (response.code()) {
@@ -90,15 +95,11 @@ class AuthViewModel : ViewModel() {
                         else -> _messageRegister.value = "Pesan error: " + response.message()
                     }
                 }
-            }
-
-            override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
+            } catch (e: Exception) {
                 isErrorRegister = true
                 _isLoadingRegister.value = false
-                _messageRegister.value = "Pesan error: " + t.message.toString()
+                _messageRegister.value = "Pesan error: " + e.message.toString()
             }
-
-        })
+        }
     }
-
 }

@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="10dp"
     android:layout_margin="8dp">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,7 +18,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:scaleType="centerCrop"
-            app:setPhoto='@{itemStory.photoUrl}'
+
             tools:srcCompat="@drawable/imagetest"/>
 
         <TextView
@@ -26,7 +27,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
             android:layout_margin="8dp"
-            android:text='@{itemStory.name}'
+
             android:textColor="@color/purple_black"
             android:textSize="16sp"
             tools:text="@string/name"
@@ -40,7 +41,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:fontFamily="@font/poppins_light"
-            android:text='@{itemStory.description}'
             android:textColor="@color/purple_black"
             android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@id/iv_image"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:layout_margin="8dp"
-            android:text='@{itemStory.description}'
+
             android:textColor="@color/purple_black"
             android:textSize="12sp"
             tools:text="@string/date_content"

@@ -4,7 +4,6 @@ package com.example.storyapp.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -15,7 +14,6 @@ import com.example.storyapp.customview.CustomPasswordEditText
 import com.example.storyapp.data.datastore.UserPreferences
 import com.example.storyapp.data.response.LoginAccount
 import com.example.storyapp.data.response.RegisterAccount
-
 import com.example.storyapp.databinding.ActivityRegisterBinding
 import com.example.storyapp.viewmodel.AuthViewModel
 import com.example.storyapp.viewmodel.UserAuthViewModel
@@ -74,13 +72,13 @@ class RegisterActivity : AppCompatActivity() {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    private fun loginResponse(isError: Boolean, message: String, userLoginViewModel: UserAuthViewModel) {
+    private fun loginResponse(isError: Boolean, message: String, userAuthViewModel: UserAuthViewModel) {
         if (!isError) {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             val user = authViewModel.userLogin.value
-            userLoginViewModel.saveLoginSession(true)
-            userLoginViewModel.saveToken(user?.loginResult!!.token)
-            userLoginViewModel.saveName(user.loginResult.name)
+            userAuthViewModel.saveLoginSession(true)
+            userAuthViewModel.saveToken(user?.loginResult!!.token)
+            userAuthViewModel.saveName(user.loginResult.name)
         } else {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }

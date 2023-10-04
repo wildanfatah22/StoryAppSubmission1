@@ -74,13 +74,13 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun loginResponse(isError: Boolean, message: String, userLoginViewModel: UserAuthViewModel) {
+    private fun loginResponse(isError: Boolean, message: String, userAuthViewModel: UserAuthViewModel) {
         if (!isError) {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             val user = authViewModel.userLogin.value
-            userLoginViewModel.saveLoginSession(true)
-            userLoginViewModel.saveToken(user?.loginResult!!.token)
-            userLoginViewModel.saveName(user.loginResult.name)
+            userAuthViewModel.saveLoginSession(true)
+            userAuthViewModel.saveToken(user?.loginResult!!.token)
+            userAuthViewModel.saveName(user.loginResult.name)
         } else {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
