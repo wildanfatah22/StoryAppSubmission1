@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.AddStoryActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="30dp">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:navigationIcon="@drawable/ic_back"
+                app:title="@string/btn_post"
+                app:titleTextAppearance="@style/titleToolBar" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <TextView
+            android:id="@+id/tv_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/purple_black"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_bar"
+            tools:text="@string/btn_post" />
+
+        <ImageView
+            android:id="@+id/iv_image_upload"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="@id/tv_user"
+            app:layout_constraintStart_toStartOf="@id/tv_user"
+            app:layout_constraintTop_toBottomOf="@id/tv_user"
+            app:srcCompat="@drawable/ic_image_photo" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/purple_black"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12sp"
+            android:text="@string/camera"
+            app:layout_constraintEnd_toStartOf="@id/btn_gallery"
+            app:layout_constraintStart_toStartOf="@id/iv_image_upload"
+            app:layout_constraintTop_toBottomOf="@id/iv_image_upload" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/purple_black"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12sp"
+            android:text="@string/gallery"
+            app:layout_constraintEnd_toEndOf="@id/iv_image_upload"
+            app:layout_constraintStart_toEndOf="@id/btn_camera"
+            app:layout_constraintTop_toBottomOf="@id/iv_image_upload" />
+
+        <EditText
+            android:id="@+id/tv_description"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="32dp"
+            android:autofillHints="Description"
+            android:background="@drawable/border_text"
+            android:gravity="top|left"
+            android:hint="@string/description"
+            android:inputType="textMultiLine"
+            android:maxHeight="2000dp"
+            android:maxLines="8"
+            android:padding="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/purple_black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/iv_image_upload"
+            app:layout_constraintStart_toStartOf="@id/iv_image_upload"
+            app:layout_constraintTop_toBottomOf="@id/btn_camera"
+            tools:ignore="RtlHardcoded" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_post_story"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/btn_post"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="16sp"
+            android:backgroundTint="@color/purple_black"
+            app:layout_constraintEnd_toEndOf="@id/tv_description"
+            app:layout_constraintStart_toStartOf="@id/tv_description"
+            app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/iv_image_upload"
+            app:layout_constraintEnd_toEndOf="@id/iv_image_upload"
+            app:layout_constraintStart_toStartOf="@id/iv_image_upload"
+            app:layout_constraintTop_toBottomOf="@id/tv_user" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StoryApp</string>
+    <string name="tvLogin">Masuk</string>
+    <string name="password">Kata sandi</string>
+    <string name="register">Daftar</string>
+    <string name="havent_account">Belum punya akun?</string>
+    <string name="name">Nama lengkap</string>
+    <string name="have_account">Sudah punya akun?</string>
+    <string name="name_none">Nama tidak boleh kosong</string>
+    <string name="email_format">Format email salah</string>
+    <string name="email_taken">Email yang anda masukkan sudah digunakan</string>
+    <string name="email_none">Email tidak boleh kosong</string>
+    <string name="password_none">Kata sandi tidak boleh kosong</string>
+    <string name="password_format">Kata sandi minimal harus 8 karakter</string>
+    <string name="login_invalid">Tidak valid!</string>
+    <string name="incorrect_credentials_message">Email atau kata sandi yang Anda masukkan salah, silakan coba lagi</string>
+    <string name="slow_internet_message">Koneksi internet Anda lambat, silakan coba lagi</string>
+    <string name="date_content">03 Oktober 2023, 15:23:55</string>
+    <string name="error_load">Gagal memuat data!</string>
+    <string name="refresh">Muat ulang</string>
+    <string name="change_language">Ganti bahasa</string>
+    <string name="logout">Keluar</string>
+    <string name="logout_description">Apakah Anda yakin ingin keluar?</string>
+    <string name="logout_success">Berhasil keluar</string>
+    <string name="logout_cancel">Batal</string>
+    <string name="created_date">"Cerita dibuat pada: "</string>
+    <string name="no_data">Data tidak ditemukan!</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="description">Deskripsi</string>
+    <string name="message">Pesan</string>
+    <string name="select_image">Pilih gambar!</string>
+    <string name="fill_description">Isi deskripsi</string>
+
+    <string name="login_success">Halo %1$s!</string>
+    <string name="login_error_message">Email atau password yang Anda masukkan salah, silakan coba lagi</string>
+    <string name="error_message">Pesan error: %1$s</string>
+    <string name="registration_success">Yeay, akun berhasil dibuat</string>
+</resources>
