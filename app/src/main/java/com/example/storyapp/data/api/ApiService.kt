@@ -19,10 +19,10 @@ import retrofit2.http.Part
 interface ApiService {
 
     @POST("register")
-    fun registerUser(@Body requestRegister: RegisterAccount): Response<DetailResponse>
+    fun registerUser(@Body requestRegister: RegisterAccount): Call<DetailResponse>
 
     @POST("login")
-    fun loginUser(@Body requestLogin: LoginAccount): Response<LoginResponse>
+    fun loginUser(@Body requestLogin: LoginAccount): Call<LoginResponse>
 
     @GET("stories")
     fun getStories(

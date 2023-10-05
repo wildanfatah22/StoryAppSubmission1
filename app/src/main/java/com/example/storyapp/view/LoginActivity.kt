@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        authChecked()
+        buttonClicked()
         playAnimation()
 
         val preferences = UserPreferences.getInstance(dataStore)
@@ -90,35 +90,10 @@ class LoginActivity : AppCompatActivity() {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    private fun authChecked() {
+    private fun buttonClicked() {
         val loginButton: MaterialButton = binding.btnLogin
         val emailEditText: CustomEmailEditText = binding.edtEmailInput
         val passwordEditText: CustomPasswordEditText = binding.edtPasswordInput
-
-        /**
-        loginButton.setOnClickListener {
-            val email = emailEditText.text.toString()
-            val password = passwordEditText.text.toString()
-
-            if (email.isEmpty() && password.isEmpty()) {
-                emailEditText.error = getString(R.string.email_none)
-                emailEditText.requestFocus()
-                passwordEditText.error = getString(R.string.password_none)
-                passwordEditText.requestFocus()
-            } else if (email.isEmpty()) {
-                emailEditText.error = getString(R.string.email_none)
-                emailEditText.requestFocus()
-            } else if (password.isEmpty()) {
-                passwordEditText.error = getString(R.string.password_none)
-                passwordEditText.requestFocus()
-            } else {
-                val loginAccount = LoginAccount(
-                    binding.edtEmailInput.text.toString().trim(),
-                    binding.edtPasswordInput.text.toString().trim()
-                )
-                authViewModel.getResponseLogin(loginAccount)
-            }
-        }**/
 
        loginButton.setOnClickListener {
             emailEditText.clearFocus()
@@ -129,7 +104,7 @@ class LoginActivity : AppCompatActivity() {
                     emailEditText.text.toString().trim(),
                     passwordEditText.text.toString().trim()
                 )
-                authViewModel.getResponseLogin(requestLogin)
+                authViewModel.getLoginResponse(requestLogin)
             } else {
                 if (!emailEditText.isEmailValid) emailEditText.error =
                     getString(R.string.email_none)
@@ -148,27 +123,25 @@ class LoginActivity : AppCompatActivity() {
             repeatMode = ObjectAnimator.REVERSE
         }.start()
 
-        val tvLoginDesc =
-            ObjectAnimator.ofFloat(binding.tvLogin, View.ALPHA, 1f).setDuration(300)
         val tvLogin = ObjectAnimator.ofFloat(binding.tvLogin, View.ALPHA, 1f).setDuration(300)
-        val evEmail = ObjectAnimator.ofFloat(binding.edtEmail, View.ALPHA, 1f).setDuration(300)
-        val evPassword =
+        val edtEmail = ObjectAnimator.ofFloat(binding.edtEmail, View.ALPHA, 1f).setDuration(300)
+        val edtPassword =
             ObjectAnimator.ofFloat(binding.edtPassword, View.ALPHA, 1f).setDuration(300)
         val btnLogin = ObjectAnimator.ofFloat(binding.btnLogin, View.ALPHA, 1f).setDuration(300)
-        val btnRegister =
-            ObjectAnimator.ofFloat(binding.goRegister, View.ALPHA, 1f).setDuration(300)
-        val tvRegistDesc =
+        val haveAcc =
             ObjectAnimator.ofFloat(binding.haveAcc, View.ALPHA, 1f).setDuration(300)
+        val tvRegister =
+            ObjectAnimator.ofFloat(binding.goRegister, View.ALPHA, 1f).setDuration(300)
 
         AnimatorSet().apply {
             playSequentially(
-                tvLoginDesc,
                 tvLogin,
-                evEmail,
-                evPassword,
+                tvLogin,
+                edtEmail,
+                edtPassword,
                 btnLogin,
-                btnRegister,
-                tvRegistDesc
+                haveAcc,
+                tvRegister
             )
             start()
         }

@@ -1,15 +1,15 @@
 <resources>
-    <string name="app_name">StoryApp</string>
+    <string name="app_name" translatable="false">StoryApp</string>
     <string name="tvLogin">Login</string>
-    <string name="email">Email</string>
+    <string name="email" translatable="false">Email</string>
     <string name="password">Password</string>
-    <string name="story">Story</string>
-    <string name="login">Login</string>
+    <string name="story" translatable="false">Story</string>
+    <string name="login" translatable="false">Login</string>
     <string name="register">Register</string>
     <string name="havent_account">Didn\'t have account?</string>
     <string name="name">Full Name</string>
     <string name="have_account">Already have account?</string>
-    <string name="app">App</string>
+    <string name="app" translatable="false">App</string>
 
 
     <string name="name_none">Name cannot be empty</string>
@@ -22,7 +22,7 @@
     <string name="password_format">Password must be at least 8 characters</string>
 
 
-    <string name="login_success_message">Hello %1$s!</string>
+    <string name="login_success_message" translatable="false">Hello %1$s!</string>
 
     <string name="login_invalid">Is invalid!</string>
 
@@ -30,13 +30,13 @@
     <string name="slow_internet_message">Your internet connection is slow, please try again</string>
 
 
-    <string name="bottom_splash_text">Submission Intermediate Android Application Development</string>
-    <string name="story_splash">Tell your story!</string>
-    <string name="bottom_splash">Midsubmission Dicoding</string>
+    <string name="bottom_splash_text" translatable="false">Submission Intermediate Android Application Development</string>
+    <string name="story_splash" translatable="false">Tell your story!</string>
+    <string name="bottom_splash" translatable="false">Midsubmission Dicoding</string>
 
 
     <string name="date_content">October 03, 2023, 15:23:55</string>
-    <string name="description_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="description_content" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 
     <string name="error_load">Failed to load data!</string>
     <string name="refresh">Refresh</string>
@@ -47,6 +47,19 @@
     <string name="logout_success">Logged out successfully</string>
     <string name="logout_cancel">Cancel</string>
     <string name="created_date">Story created on:</string>
+    <string name="no_data">No data found!</string>
+    <string name="btn_post" translatable="false">Post Story</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="description">Description</string>
+    <string name="message">"Message: "</string>
+    <string name="select_image">Select image!</string>
+    <string name="fill_description">Fill the description</string>
+    <string name="package_name" translatable="false">com.example.storyapp</string>
 
+    <string name="login_success">Halo %1$s!</string>
+    <string name="login_error_message">The email or password you entered is incorrect, please try again</string>
+    <string name="error_message">Error message: %1$s</string>
+    <string name="registration_success">Yeay, account has been successfully created</string>
 
 </resources>

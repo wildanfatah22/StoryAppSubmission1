@@ -12,14 +12,7 @@
 
         <menu>
             <item
-                android:id="@+id/refreshApp"
-                android:icon="@drawable/ic_refresh"
-                android:iconTint="@color/black"
-                android:title="@string/refresh"
-                app:showAsAction="never" />
-
-            <item
-                android:id="@+id/changeLanguage"
+                android:id="@+id/change_language"
                 android:icon="@drawable/ic_lang"
                 android:iconTint="@color/black"
                 android:title="@string/change_language"

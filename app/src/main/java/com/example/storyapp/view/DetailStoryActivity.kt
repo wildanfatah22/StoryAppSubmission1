@@ -2,20 +2,56 @@ package com.example.storyapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.example.storyapp.R
+import com.example.storyapp.data.adapter.StoryAdapter
+import com.example.storyapp.data.response.DetailStory
+import com.example.storyapp.databinding.ActivityDetailStoryBinding
+import com.google.android.material.appbar.AppBarLayout
 
 class DetailStoryActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityDetailStoryBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_story)
+        binding = ActivityDetailStoryBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
+        val story = intent.getParcelableExtra<DetailStory>(KEY_DATA) as DetailStory
+        setStory(story)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun setStory(story: DetailStory) {
+        binding.apply {
+            tvName.text = story.name
+            tvDescription.text = story.description
+            tvDate.text = StoryAdapter.formatDateToString(story.createdAt)
+        }
+        Glide.with(this)
+            .load(story.photoUrl)
+            .placeholder(R.drawable.ic_launcher_foreground)
+            .into(binding.ivStory)
     }
 
     companion object {
         const val KEY_DATA = "Data"
-        private const val TAG = "DetailStoryActivity"
-        const val KEY_USERNAME = "username"
-        const val KEY_ID = "extra id"
-        const val KEY_PHOTO = "extra_photo"
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 }

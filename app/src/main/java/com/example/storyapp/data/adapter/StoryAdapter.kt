@@ -6,6 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.storyapp.data.response.DetailStory
 import com.example.storyapp.databinding.ItemStoryBinding
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
 class StoryAdapter(private val listStory: List<DetailStory>) :
@@ -47,4 +51,24 @@ class StoryAdapter(private val listStory: List<DetailStory>) :
     }
 
     override fun getItemCount(): Int = listStory.size
+
+    companion object {
+        @JvmStatic
+        fun formatDateToString(dateString: String): String {
+            val inputDateFormat =
+                SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+            val outputDateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+            val date: Date?
+            var outputDate = ""
+
+            try {
+                date = inputDateFormat.parse(dateString)
+                outputDate = outputDateFormat.format(date!!)
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+
+            return outputDate
+        }
+    }
 }

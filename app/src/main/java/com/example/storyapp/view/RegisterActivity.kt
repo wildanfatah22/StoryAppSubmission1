@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.storyapp.R
@@ -32,7 +33,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        authChecked()
+        buttonClicked()
 
         val preferences = UserPreferences.getInstance(dataStore)
         val userAuthViewModel =
@@ -68,6 +69,8 @@ class RegisterActivity : AppCompatActivity() {
             showLoading(it)
         }
     }
+
+
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
@@ -91,7 +94,7 @@ class RegisterActivity : AppCompatActivity() {
                 binding.edtInputemail.text.toString(),
                 binding.edtInputpassword.text.toString()
             )
-            authViewModel.getResponseLogin(userLogin)
+            authViewModel.getLoginResponse(userLogin)
         } else {
             if (message == "1") {
                 binding.edtInputemail.setMessage(resources.getString(R.string.email_taken), binding.edtInputemail.text.toString())
@@ -103,11 +106,12 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun authChecked() {
+    private fun buttonClicked() {
         val registerButton: MaterialButton = binding.btnRegister
         val nameEditText: CustomNameEditText = binding.edtInputname
         val emailEditText: CustomEmailEditText = binding.edtInputemail
         val passwordEditText: CustomPasswordEditText = binding.edtInputpassword
+        val btnBack: ImageButton = binding.btnBack
 
         registerButton.setOnClickListener {
             nameEditText.clearFocus()
@@ -121,7 +125,7 @@ class RegisterActivity : AppCompatActivity() {
                     password = passwordEditText.text.toString().trim()
                 )
 
-                authViewModel.getResponseRegister(dataRegisterAccount)
+                authViewModel.getRegisterResponse(dataRegisterAccount)
             } else {
                 if (!nameEditText.isNameValid) nameEditText.error =
                     resources.getString(R.string.name_none)
@@ -131,6 +135,10 @@ class RegisterActivity : AppCompatActivity() {
                     resources.getString(R.string.password_none)
                 Toast.makeText(this, R.string.login_invalid, Toast.LENGTH_SHORT).show()
             }
+        }
+
+        btnBack.setOnClickListener {
+            onBackPressed()
         }
     }
 

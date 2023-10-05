@@ -6,8 +6,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.ViewModelProvider
+import com.example.storyapp.data.datastore.UserPreferences
 import com.example.storyapp.databinding.ActivitySplashBinding
+import com.example.storyapp.viewmodel.UserAuthViewModel
+import com.example.storyapp.viewmodel.UserAuthViewModelFactory
 
 class SplashActivity : AppCompatActivity() {
 
@@ -19,17 +22,33 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        playAnimation()
+        val pref = UserPreferences.getInstance(dataStore)
+        val loginViewModel =
+            ViewModelProvider(this, UserAuthViewModelFactory(pref))[UserAuthViewModel::class.java]
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        loginViewModel.getLoginSession().observe(this) { isLoggedIn ->
+            playAnimation()
 
-        val SPLASH_DELAY: Long = 3000
+            val intent = if (isLoggedIn) {
+                Intent(this, MainActivity::class.java)
+            } else {
+                Intent(this, LoginActivity::class.java)
+            }
 
-        binding.tvLogo.postDelayed({
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, SPLASH_DELAY)
+
+            val SPLASH_DELAY: Long = 3000
+
+            binding.tvLogo.animate()
+                .setDuration(SPLASH_DELAY)
+                .alpha(0f)
+                .withEndAction {
+                    startActivity(intent)
+                    finish()
+                }
+
+
+        }
+
     }
 
     private fun playAnimation() {
