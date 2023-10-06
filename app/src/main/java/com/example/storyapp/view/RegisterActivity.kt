@@ -1,6 +1,8 @@
 package com.example.storyapp.view
 
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -140,6 +142,29 @@ class RegisterActivity : AppCompatActivity() {
         btnBack.setOnClickListener {
             onBackPressed()
         }
+    }
+
+    private fun playAnimation() {
+        ObjectAnimator.ofFloat(binding.tvRegister, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
+
+        val titleTv = ObjectAnimator.ofFloat(binding.edtName, View.ALPHA, 1f).setDuration(100)
+        val nameTv = ObjectAnimator.ofFloat(binding.edtInputname, View.ALPHA, 1f).setDuration(100)
+        val editNameTv = ObjectAnimator.ofFloat(binding.edtEmail, View.ALPHA, 1f).setDuration(100)
+        val emailTv = ObjectAnimator.ofFloat(binding.edtInputemail, View.ALPHA, 1f).setDuration(100)
+        val editEmailTv = ObjectAnimator.ofFloat(binding.edtPassword, View.ALPHA, 1f).setDuration(100)
+        val passwordTv = ObjectAnimator.ofFloat(binding.edtInputpassword, View.ALPHA, 1f).setDuration(100)
+        val editPasswordTv = ObjectAnimator.ofFloat(binding.btnRegister, View.ALPHA, 1f).setDuration(100)
+        val btnSignup = ObjectAnimator.ofFloat(binding.haveAcc, View.ALPHA, 1f).setDuration(100)
+        val btnSignup2 = ObjectAnimator.ofFloat(binding.goLogin, View.ALPHA, 1f).setDuration(100)
+
+        AnimatorSet().apply {
+            playSequentially(titleTv, nameTv, editNameTv, emailTv, editEmailTv, passwordTv, editPasswordTv, btnSignup, btnSignup2)
+            startDelay = 100
+        }.start()
     }
 
 }

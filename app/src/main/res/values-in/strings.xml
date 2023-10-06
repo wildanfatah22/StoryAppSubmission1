@@ -37,4 +37,5 @@
     <string name="login_error_message">Email atau password yang Anda masukkan salah, silakan coba lagi</string>
     <string name="error_message">Pesan error: %1$s</string>
     <string name="registration_success">Yeay, akun berhasil dibuat</string>
+    <string name="post_user">Buat cerita baru</string>
 </resources>

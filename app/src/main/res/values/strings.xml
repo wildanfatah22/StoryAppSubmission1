@@ -61,5 +61,7 @@
     <string name="login_error_message">The email or password you entered is incorrect, please try again</string>
     <string name="error_message">Error message: %1$s</string>
     <string name="registration_success">Yeay, account has been successfully created</string>
+    <string name="detail_title" translatable="false">%1$s Story</string>
+    <string name="post_user">Create new story</string>
 
 </resources>

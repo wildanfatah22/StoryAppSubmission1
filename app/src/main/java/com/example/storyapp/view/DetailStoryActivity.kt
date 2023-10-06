@@ -3,14 +3,11 @@ package com.example.storyapp.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.storyapp.R
 import com.example.storyapp.data.adapter.StoryAdapter
 import com.example.storyapp.data.response.DetailStory
 import com.example.storyapp.databinding.ActivityDetailStoryBinding
-import com.google.android.material.appbar.AppBarLayout
 
 class DetailStoryActivity : AppCompatActivity() {
 
@@ -24,7 +21,7 @@ class DetailStoryActivity : AppCompatActivity() {
 
         val story = intent.getParcelableExtra<DetailStory>(KEY_DATA) as DetailStory
         setStory(story)
-        setSupportActionBar(binding.toolbar)
+        supportActionBar?.title = getString(R.string.detail_title, story.name)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

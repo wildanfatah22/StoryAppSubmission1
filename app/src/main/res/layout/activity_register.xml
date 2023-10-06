@@ -4,142 +4,157 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.RegisterActivity"
-    android:background="@drawable/bg">
+    android:background="@drawable/bg"
+    tools:context=".view.RegisterActivity">
 
     <ImageButton
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_back"
-        android:backgroundTint="@color/white"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/register"
+        android:textColor="@color/purple_black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_back" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edt_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_back"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="24dp"
         android:layout_marginHorizontal="32dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/tv_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/register"
-            android:textSize="24sp"
-            android:fontFamily="@font/poppins_medium"
-            android:textColor="@color/purple_black"/>
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxStrokeColor="@color/light_gray"
+        app:layout_constraintEnd_toEndOf="@id/tv_register"
+        app:layout_constraintStart_toStartOf="@id/tv_register"
+        app:layout_constraintTop_toBottomOf="@id/tv_register"
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_name"
+        app:startIconDrawable="@drawable/ic_person">
+
+        <com.example.storyapp.customview.CustomNameEditText
+            android:id="@+id/edt_inputname"
+            style="@style/authTextBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:boxCornerRadiusTopStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusBottomEnd="12dp"
-            app:boxStrokeColor="@color/light_gray"
-            app:startIconDrawable="@drawable/ic_person">
-            <com.example.storyapp.customview.CustomNameEditText
-                android:id="@+id/edt_inputname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/authTextBox"
-                android:inputType="textPersonName"
-                android:hint="@string/name"
-                android:textColorHint="@color/light_gray"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:hint="@string/name"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/light_gray" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_email"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edt_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="32dp"
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxStrokeColor="@color/light_gray"
+        app:layout_constraintEnd_toEndOf="@id/edt_name"
+        app:layout_constraintStart_toStartOf="@id/edt_name"
+        app:layout_constraintTop_toBottomOf="@id/edt_name"
+        app:startIconDrawable="@drawable/ic_email">
+
+        <com.example.storyapp.customview.CustomEmailEditText
+            android:id="@+id/edt_inputemail"
+            style="@style/authTextBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:boxCornerRadiusTopStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusBottomEnd="12dp"
-            app:boxStrokeColor="@color/light_gray"
-            app:startIconDrawable="@drawable/ic_email">
-            <com.example.storyapp.customview.CustomEmailEditText
-                android:id="@+id/edt_inputemail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/authTextBox"
-                android:inputType="textEmailAddress"
-                android:hint="@string/email"
-                android:textColorHint="@color/light_gray"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/light_gray" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_password"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edt_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="32dp"
+
+        app:boxCornerRadiusBottomEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxStrokeColor="@color/light_gray"
+        app:layout_constraintEnd_toEndOf="@id/edt_email"
+        app:layout_constraintStart_toStartOf="@id/edt_email"
+        app:layout_constraintTop_toBottomOf="@id/edt_email"
+        app:startIconDrawable="@drawable/ic_password">
+
+        <com.example.storyapp.customview.CustomPasswordEditText
+            android:id="@+id/edt_inputpassword"
+            style="@style/authTextBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:boxCornerRadiusTopStart="12dp"
-            app:boxCornerRadiusTopEnd="12dp"
-            app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusBottomEnd="12dp"
-            app:boxStrokeColor="@color/light_gray"
-            app:startIconDrawable="@drawable/ic_password">
-            <com.example.storyapp.customview.CustomPasswordEditText
-                android:id="@+id/edt_inputpassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/authTextBox"
-                android:inputType="textPassword"
-                android:hint="@string/password"
-                android:textColorHint="@color/light_gray"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textColorHint="@color/light_gray" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_register"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginHorizontal="32dp"
-            android:text="@string/register"
-            android:textSize="16sp"
-            android:backgroundTint="@color/blue"
-            app:cornerRadius="12dp" />
-    </LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/blue"
+        android:text="@string/register"
+        android:textSize="16sp"
+        app:cornerRadius="12dp"
+        app:layout_constraintStart_toStartOf="@id/edt_password"
+        app:layout_constraintEnd_toEndOf="@id/edt_password"
+        app:layout_constraintTop_toBottomOf="@id/edt_password" />
+
 
     <TextView
         android:id="@+id/have_acc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/go_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="@string/have_account"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="30dp"
         android:fontFamily="@font/poppins_medium"
-        android:textSize="16sp"
+        android:text="@string/have_account"
         android:textColor="@color/purple_black"
-        app:layout_constraintHorizontal_chainStyle="packed"/>
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/go_login"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/go_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/have_acc"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="30dp"
         android:fontFamily="@font/poppins_medium"
-        android:textSize="16sp"
+        android:text="@string/login"
         android:textColor="@color/blue"
-        android:text="@string/login"/>
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/have_acc" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -151,6 +166,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
