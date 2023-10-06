@@ -28,19 +28,8 @@ class CustomNameEditText: TextInputEditText, View.OnFocusChangeListener {
         init()
     }
 
-//    private fun init() {
-//        // Set background with border
-//        background = ContextCompat.getDrawable(context, R.drawable.border)
-//
-//        // Set input type to text
-//        inputType = InputType.TYPE_CLASS_TEXT
-//
-//        // Set onFocusChangeListener to validate name
-//        onFocusChangeListener = this
-//    }
 
     private fun init() {
-        // Tambahkan TextWatcher untuk validasi format email
         addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 isNameValid = text.toString().trim().isNotEmpty()

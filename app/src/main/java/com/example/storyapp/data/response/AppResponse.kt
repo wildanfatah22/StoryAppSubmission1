@@ -34,11 +34,11 @@ data class LoginResult(
 data class StoryResponse(
 	var error: String,
 	var message: String,
-	var listStory: List<StoryDetail>
+	var listStory: ArrayList<DetailStory>
 )
 
 @Parcelize
-data class StoryDetail(
+data class DetailStory(
 	var id: String,
 	var name: String,
 	var description: String,

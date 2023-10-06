@@ -17,12 +17,6 @@ import retrofit2.http.Part
 
 interface ApiService {
 
-//    @POST("register")
-//    fun registerUser(@Body requestRegister: RegisterAccount): Response<DetailResponse>
-
-//    @POST("login")
-//    fun loginUser(@Body requestLogin: LoginAccount): Response<LoginResponse>
-
     @POST("register")
     fun registerUser(@Body requestRegister: RegisterAccount): Call<DetailResponse>
 
@@ -30,13 +24,13 @@ interface ApiService {
     fun loginUser(@Body requestLogin: LoginAccount): Call<LoginResponse>
 
     @GET("stories")
-    suspend fun getStories(
+    fun getStories(
         @Header("Authorization") token: String
     ): Call<StoryResponse>
 
     @Multipart
     @POST("stories")
-    suspend fun uploadPicture(
+    fun uploadPicture(
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody,
         @Header("Authorization") token: String
