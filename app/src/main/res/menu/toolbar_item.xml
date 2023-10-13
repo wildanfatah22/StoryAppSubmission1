@@ -5,28 +5,25 @@
     android:layout_height="match_parent">
 
     <item
-        android:id="@+id/more"
-        android:icon="@drawable/ic_more"
-        android:title=""
-        app:showAsAction="always">
+        android:id="@+id/change_language"
+        android:icon="@drawable/ic_lang"
+        android:iconTint="@color/black"
+        android:title="@string/change_language"
+        app:showAsAction="never" />
 
-        <menu>
-            <item
-                android:id="@+id/change_language"
-                android:icon="@drawable/ic_lang"
-                android:iconTint="@color/black"
-                android:title="@string/change_language"
-                app:showAsAction="never" />
+    <item
+        android:id="@+id/see_maps"
+        android:icon="@drawable/ic_map"
+        android:iconTint="@color/black"
+        android:title="@string/see_maps"
+        app:showAsAction="never" />
 
-            <item
-                android:id="@+id/logout"
-                android:icon="@drawable/ic_logout"
-                android:iconTint="@color/black"
-                android:title="@string/logout"
-                app:showAsAction="never" />
-        </menu>
-    </item>
-
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_logout"
+        android:iconTint="@color/black"
+        android:title="@string/logout"
+        app:showAsAction="never" />
 
 
 </menu>

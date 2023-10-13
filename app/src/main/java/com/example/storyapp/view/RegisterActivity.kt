@@ -14,11 +14,12 @@ import com.example.storyapp.R
 import com.example.storyapp.customview.CustomEmailEditText
 import com.example.storyapp.customview.CustomNameEditText
 import com.example.storyapp.customview.CustomPasswordEditText
-import com.example.storyapp.data.datastore.UserPreferences
+import com.example.storyapp.data.local.datastore.UserPreferences
 import com.example.storyapp.data.response.LoginAccount
 import com.example.storyapp.data.response.RegisterAccount
 import com.example.storyapp.databinding.ActivityRegisterBinding
 import com.example.storyapp.viewmodel.AuthViewModel
+import com.example.storyapp.viewmodel.AuthViewModelFactory
 import com.example.storyapp.viewmodel.UserAuthViewModel
 import com.example.storyapp.viewmodel.UserAuthViewModelFactory
 import com.google.android.material.button.MaterialButton
@@ -28,13 +29,14 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
 
     private val authViewModel: AuthViewModel by lazy {
-        ViewModelProvider(this)[AuthViewModel::class.java]
+        ViewModelProvider(this, AuthViewModelFactory(this))[AuthViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        playAnimation()
         buttonClicked()
 
         val preferences = UserPreferences.getInstance(dataStore)
@@ -48,37 +50,34 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        authViewModel.messageRegister.observe(this) { messageRegister ->
+        authViewModel.message.observe(this) { messageRegister ->
             registerResponse(
-                authViewModel.isErrorRegister,
                 messageRegister
             )
         }
 
-        authViewModel.isLoadingRegister.observe(this) {
+        authViewModel.isLoading.observe(this) {
             showLoading(it)
         }
 
-        authViewModel.messageLogin.observe(this) { messageLogin ->
+        authViewModel.message.observe(this) { messageLogin ->
             loginResponse(
-                authViewModel.isErrorLogin,
                 messageLogin,
                 userAuthViewModel
             )
         }
 
-        authViewModel.isLoadingLogin.observe(this) {
+        authViewModel.isLoading.observe(this) {
             showLoading(it)
         }
     }
-
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    private fun loginResponse(isError: Boolean, message: String, userAuthViewModel: UserAuthViewModel) {
-        if (!isError) {
+    private fun loginResponse(message: String, userAuthViewModel: UserAuthViewModel) {
+        if (message.contains("Hello")) {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             val user = authViewModel.userLogin.value
             userAuthViewModel.saveLoginSession(true)
@@ -89,14 +88,14 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun registerResponse(isError: Boolean, message: String, ) {
-        if (!isError) {
+    private fun registerResponse(message: String) {
+        if (message == "Yeay akun berhasil dibuat") {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             val userLogin = LoginAccount(
                 binding.edtInputemail.text.toString(),
                 binding.edtInputpassword.text.toString()
             )
-            authViewModel.getLoginResponse(userLogin)
+            authViewModel.login(userLogin)
         } else {
             if (message == "1") {
                 binding.edtInputemail.setMessage(resources.getString(R.string.email_taken), binding.edtInputemail.text.toString())
@@ -127,7 +126,7 @@ class RegisterActivity : AppCompatActivity() {
                     password = passwordEditText.text.toString().trim()
                 )
 
-                authViewModel.getRegisterResponse(dataRegisterAccount)
+                authViewModel.register(dataRegisterAccount)
             } else {
                 if (!nameEditText.isNameValid) nameEditText.error =
                     resources.getString(R.string.name_none)

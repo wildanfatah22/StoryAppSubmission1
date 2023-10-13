@@ -15,10 +15,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.storyapp.R
 import com.example.storyapp.customview.CustomEmailEditText
 import com.example.storyapp.customview.CustomPasswordEditText
-import com.example.storyapp.data.datastore.UserPreferences
+import com.example.storyapp.data.local.datastore.UserPreferences
 import com.example.storyapp.data.response.LoginAccount
 import com.example.storyapp.databinding.ActivityLoginBinding
 import com.example.storyapp.viewmodel.AuthViewModel
+import com.example.storyapp.viewmodel.AuthViewModelFactory
 import com.example.storyapp.viewmodel.UserAuthViewModel
 import com.example.storyapp.viewmodel.UserAuthViewModelFactory
 import com.google.android.material.button.MaterialButton
@@ -30,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     private val authViewModel: AuthViewModel by lazy {
-        ViewModelProvider(this)[AuthViewModel::class.java]
+        ViewModelProvider(this, AuthViewModelFactory(this))[AuthViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,15 +54,14 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        authViewModel.messageLogin.observe(this) { message ->
+        authViewModel.message.observe(this) { message ->
             loginResponse(
-                authViewModel.isErrorLogin,
                 message,
                 userAuthViewModel
             )
         }
 
-        authViewModel.isLoadingLogin.observe(this) {
+        authViewModel.isLoading.observe(this) {
             showLoading(it)
         }
 
@@ -72,8 +72,8 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun loginResponse(isError: Boolean, message: String, userAuthViewModel: UserAuthViewModel) {
-        if (!isError) {
+    private fun loginResponse(message: String, userAuthViewModel: UserAuthViewModel) {
+        if (message.contains("Hello")) {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             val user = authViewModel.userLogin.value
             userAuthViewModel.saveLoginSession(true)
@@ -102,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
                     emailEditText.text.toString().trim(),
                     passwordEditText.text.toString().trim()
                 )
-                authViewModel.getLoginResponse(requestLogin)
+                authViewModel.login(requestLogin)
             } else {
                 if (!emailEditText.isEmailValid) emailEditText.error =
                     getString(R.string.email_none)
@@ -144,6 +144,4 @@ class LoginActivity : AppCompatActivity() {
             start()
         }
     }
-
-
 }

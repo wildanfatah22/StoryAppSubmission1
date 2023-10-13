@@ -64,4 +64,21 @@
     <string name="detail_title" translatable="false">%1$s Story</string>
     <string name="post_user">Create new story</string>
 
+
+    <string name="location">Your Location</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_location">LocationActivity</string>
+    <string name="my_location">Use my location</string>
+    <string name="pick_location">Pick Location</string>
+    <string name="click_map">Click Map to Choose Location</string>
+    <string name="retro_maps">Retro Style Map</string>
+    <string name="standard_maps">Standard Maps</string>
+    <string name="start_point">Start Point</string>
+    <string name="yes">yes</string>
+    <string name="no">No</string>
+    <string name="use_location">Use this location?</string>
+    <string name="location_not_found">Location not found!</string>
+    <string name="see_maps">See Maps</string>
+    <string name="try_again">Coba lagi</string>
+
 </resources>

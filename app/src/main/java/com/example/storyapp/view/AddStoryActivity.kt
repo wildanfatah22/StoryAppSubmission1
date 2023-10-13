@@ -1,5 +1,6 @@
 package com.example.storyapp.view
 
+import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
@@ -17,11 +18,13 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.storyapp.R
-import com.example.storyapp.data.datastore.UserPreferences
+import com.example.storyapp.data.local.datastore.UserPreferences
 import com.example.storyapp.databinding.ActivityAddStoryBinding
 import com.example.storyapp.viewmodel.AddStoryViewModel
+import com.example.storyapp.viewmodel.AddStoryViewModelFactory
 import com.example.storyapp.viewmodel.UserAuthViewModel
 import com.example.storyapp.viewmodel.UserAuthViewModelFactory
+import com.google.android.gms.maps.model.LatLng
 import id.zelory.compressor.Compressor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -47,9 +50,11 @@ class AddStoryActivity : AppCompatActivity() {
     private lateinit var fileFinal: File
     private var anyPhoto = false
     private lateinit var currentPhotoPath: String
+    private var latlng: LatLng? = null
+
 
     private val addStoryViewModel: AddStoryViewModel by lazy {
-        ViewModelProvider(this)[AddStoryViewModel::class.java]
+        ViewModelProvider(this, AddStoryViewModelFactory(this))[AddStoryViewModel::class.java]
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,23 +87,19 @@ class AddStoryActivity : AppCompatActivity() {
 
     }
 
-    private fun showToast(msg: String) {
-        Toast.makeText(
-            this@AddStoryActivity,
-            StringBuilder(getString(R.string.message)).append(msg),
-            Toast.LENGTH_SHORT
-        ).show()
+    private val resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.let { data ->
+                    val address = data.getStringExtra("address")
+                    val lat = data.getDoubleExtra("lat", 0.0)
+                    val lng = data.getDoubleExtra("lng", 0.0)
+                    latlng = LatLng(lat, lng)
 
-        if (msg == "Story created successfully") {
-            val intent = Intent(this@AddStoryActivity,MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+                    binding.detailLocation.text = address
+                }
+            }
         }
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
 
     private fun buttonClicked() {
         binding.btnPostStory.setOnClickListener {
@@ -114,7 +115,6 @@ class AddStoryActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 withContext(Dispatchers.IO) {
                     val file = getFile as File
-
                     var compressedFile: File? = null
                     var compressedFileSize = file.length()
 
@@ -126,6 +126,7 @@ class AddStoryActivity : AppCompatActivity() {
                     }
                     fileFinal = compressedFile ?: file
                 }
+
                 val requestImageFile =
                     fileFinal.asRequestBody("image/jpeg".toMediaTypeOrNull())
                 val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
@@ -134,7 +135,7 @@ class AddStoryActivity : AppCompatActivity() {
                     requestImageFile
                 )
                 val desPart = des.toRequestBody("text/plain".toMediaType())
-                addStoryViewModel.upload(imageMultipart, desPart, token)
+                addStoryViewModel.upload(imageMultipart, desPart, latlng?.latitude, latlng?.longitude, token)
             }
         }
 
@@ -144,6 +145,11 @@ class AddStoryActivity : AppCompatActivity() {
 
         binding.btnGallery.setOnClickListener {
             startGallery()
+        }
+
+        binding.layoutLocation.setOnClickListener {
+            val intent = Intent(this, LocationActivity::class.java)
+            resultLauncher.launch(intent)
         }
     }
 
@@ -222,6 +228,24 @@ class AddStoryActivity : AppCompatActivity() {
             }
             else -> return super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun showToast(msg: String) {
+        Toast.makeText(
+            this@AddStoryActivity,
+            StringBuilder(getString(R.string.message)).append(msg),
+            Toast.LENGTH_SHORT
+        ).show()
+
+        if (msg == "Story created successfully") {
+            val intent = Intent(this@AddStoryActivity,MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     companion object {

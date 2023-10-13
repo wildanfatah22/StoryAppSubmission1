@@ -2,24 +2,26 @@ package com.example.storyapp.view
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storyapp.R
+import com.example.storyapp.data.adapter.LoadingStateAdapter
 import com.example.storyapp.data.adapter.StoryAdapter
-import com.example.storyapp.data.datastore.UserPreferences
-import com.example.storyapp.data.response.DetailStory
+import com.example.storyapp.data.local.datastore.UserPreferences
+import com.example.storyapp.data.local.entity.StoryDetailResponse
 import com.example.storyapp.databinding.ActivityMainBinding
 import com.example.storyapp.viewmodel.MainViewModel
+import com.example.storyapp.viewmodel.MainViewModelFactory
 import com.example.storyapp.viewmodel.UserAuthViewModel
 import com.example.storyapp.viewmodel.UserAuthViewModelFactory
 
@@ -27,8 +29,9 @@ class MainActivity : AppCompatActivity() {
     private val pref = UserPreferences.getInstance(dataStore)
     private lateinit var binding: ActivityMainBinding
     private lateinit var token: String
+
     private val mainViewModel: MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
+        ViewModelProvider(this, MainViewModelFactory(this))[MainViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,77 +92,69 @@ class MainActivity : AppCompatActivity() {
         binding.rvStories.addItemDecoration(itemDecoration)
     }
 
-    private fun setUserData(storyList: List<DetailStory>) {
-        showNoData(storyList.isEmpty())
-
-        val adapter = StoryAdapter(storyList)
-        binding.rvStories.adapter = adapter
-
-        adapter.setOnItemClickCallback(object : StoryAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: DetailStory) {
-                navigateToUserDetail(data)
-            }
-        })
-    }
-
-    private fun navigateToUserDetail(data: DetailStory) {
-        val intent = Intent(this@MainActivity, DetailStoryActivity::class.java)
-        intent.putExtra(DetailStoryActivity.KEY_DATA,data)
-        startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this as Activity).toBundle())
-    }
-
     private fun observeData() {
         val userAuthViewModel =
             ViewModelProvider(this, UserAuthViewModelFactory(pref))[UserAuthViewModel::class.java]
 
         userAuthViewModel.getToken().observe(this) {
             token = it
-            mainViewModel.getStories(token)
-        }
-
-        mainViewModel.message.observe(this) {
-            setUserData(mainViewModel.stories)
-            showToast(it)
-        }
-
-        mainViewModel.isLoading.observe(this) {
-            showLoading(it)
+            setUserData(it)
         }
     }
+
+    @OptIn(ExperimentalPagingApi::class)
+    private fun setUserData(token: String) {
+
+        val adapter = StoryAdapter()
+        binding.rvStories.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
+            })
+
+        mainViewModel.getPagingStories(token).observe(this) {
+            adapter.submitData(lifecycle, it)
+        }
+
+        adapter.setOnItemClickCallback(object : StoryAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: StoryDetailResponse) {
+                navigateToUserDetail(data)
+            }
+        })
+    }
+
+    private fun navigateToUserDetail(data: StoryDetailResponse) {
+        val intent = Intent(this@MainActivity, DetailStoryActivity::class.java)
+        intent.putExtra(DetailStoryActivity.KEY_DATA, data)
+        startActivity(
+            intent,
+            ActivityOptionsCompat.makeSceneTransitionAnimation(this as Activity).toBundle()
+        )
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.toolbar_item, menu)
         return true
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.change_language -> {
                 startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
                 true
             }
+
+            R.id.see_maps -> {
+                startActivity(Intent(this, MapsActivity::class.java))
+                true
+            }
+
             R.id.logout -> {
                 showAlertDialog()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
-
-    private fun showToast(msg: String) {
-        if (mainViewModel.isError) {
-            Toast.makeText(
-                this,
-                "${getString(R.string.error_load)} $msg",
-                Toast.LENGTH_LONG
-            ).show()
-        }
-    }
-
-    private fun showNoData(isNoData: Boolean) {
-        binding.noDataFound.visibility = if (isNoData) View.VISIBLE else View.GONE
     }
 
 

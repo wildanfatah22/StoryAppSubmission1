@@ -64,6 +64,28 @@
             app:layout_constraintStart_toEndOf="@id/tv_created"
             app:layout_constraintTop_toTopOf="@id/tv_created" />
 
+        <ImageView
+            android:id="@+id/iv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/tv_description"
+            app:layout_constraintStart_toStartOf="@id/tv_created"
+            app:layout_constraintTop_toBottomOf="@id/tv_created"
+            app:srcCompat="@drawable/ic_location" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            tools:text="No Location"
+            app:layout_constraintEnd_toEndOf="@id/iv_story"
+            app:layout_constraintStart_toEndOf="@id/iv_location"
+            app:layout_constraintTop_toBottomOf="@id/tv_date"
+            app:layout_constraintBottom_toTopOf="@id/tv_description"/>
+
         <TextView
             android:id="@+id/tv_description"
             android:transitionName="description"
@@ -72,7 +94,7 @@
             android:layout_marginTop="16dp"
             android:textColor="@color/purple_black"
             app:layout_constraintStart_toStartOf="@id/tv_created"
-            app:layout_constraintTop_toBottomOf="@id/tv_created"
+            app:layout_constraintTop_toBottomOf="@id/tv_location"
             tools:text="@string/description_content" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
