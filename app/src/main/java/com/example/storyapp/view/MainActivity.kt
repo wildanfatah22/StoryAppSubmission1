@@ -2,14 +2,13 @@ package com.example.storyapp.view
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.ExperimentalPagingApi
@@ -20,10 +19,7 @@ import com.example.storyapp.data.adapter.LoadingStateAdapter
 import com.example.storyapp.data.adapter.StoryAdapter
 import com.example.storyapp.data.local.datastore.UserPreferences
 import com.example.storyapp.data.local.entity.StoryDetailResponse
-import com.example.storyapp.data.response.DetailStory
 import com.example.storyapp.databinding.ActivityMainBinding
-import com.example.storyapp.viewmodel.AuthViewModel
-import com.example.storyapp.viewmodel.AuthViewModelFactory
 import com.example.storyapp.viewmodel.MainViewModel
 import com.example.storyapp.viewmodel.MainViewModelFactory
 import com.example.storyapp.viewmodel.UserAuthViewModel

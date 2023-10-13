@@ -33,12 +33,6 @@ data class LoginResult(
 	var token: String
 )
 
-data class StoryResponse(
-	var error: String,
-	var message: String,
-	var listStory: ArrayList<DetailStory>
-)
-
 @Parcelize
 data class DetailStory(
 	var id: String,

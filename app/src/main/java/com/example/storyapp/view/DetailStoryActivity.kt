@@ -1,13 +1,12 @@
 package com.example.storyapp.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.storyapp.R
 import com.example.storyapp.data.adapter.StoryAdapter
 import com.example.storyapp.data.local.entity.StoryDetailResponse
-import com.example.storyapp.data.response.DetailStory
 import com.example.storyapp.databinding.ActivityDetailStoryBinding
 import com.example.storyapp.helper.LocationConverter
 

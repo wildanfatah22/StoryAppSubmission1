@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.storyapp.R
 import com.example.storyapp.data.local.entity.StoryDetailResponse
-import com.example.storyapp.data.response.DetailStory
 import com.example.storyapp.databinding.ItemStoryBinding
 import java.text.ParseException
 import java.text.SimpleDateFormat

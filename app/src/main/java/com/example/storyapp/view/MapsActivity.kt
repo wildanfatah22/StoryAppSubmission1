@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.storyapp.R
 import com.example.storyapp.data.local.datastore.UserPreferences
 import com.example.storyapp.data.local.entity.StoryDetailResponse
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback

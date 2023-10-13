@@ -6,7 +6,6 @@ import com.example.storyapp.data.response.LoginResponse
 import com.example.storyapp.data.response.RegisterAccount
 import com.example.storyapp.data.response.ResponseLocationStory
 import com.example.storyapp.data.response.ResponsePagingStory
-import com.example.storyapp.data.response.StoryResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
