@@ -2,7 +2,7 @@ package com.example.storyapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.storyapp.data.datastore.UserPreferences
+import com.example.storyapp.data.local.datastore.UserPreferences
 
 class UserAuthViewModelFactory(private val pref: UserPreferences) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")

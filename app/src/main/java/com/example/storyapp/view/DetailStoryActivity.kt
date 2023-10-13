@@ -6,8 +6,10 @@ import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.example.storyapp.R
 import com.example.storyapp.data.adapter.StoryAdapter
+import com.example.storyapp.data.local.entity.StoryDetailResponse
 import com.example.storyapp.data.response.DetailStory
 import com.example.storyapp.databinding.ActivityDetailStoryBinding
+import com.example.storyapp.helper.LocationConverter
 
 class DetailStoryActivity : AppCompatActivity() {
 
@@ -19,18 +21,23 @@ class DetailStoryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val story = intent.getParcelableExtra<DetailStory>(KEY_DATA) as DetailStory
+        val story = intent.getParcelableExtra<StoryDetailResponse>(KEY_DATA) as StoryDetailResponse
         setStory(story)
         supportActionBar?.title = getString(R.string.detail_title, story.name)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun setStory(story: DetailStory) {
+    private fun setStory(story: StoryDetailResponse) {
         binding.apply {
             tvName.text = story.name
             tvDescription.text = story.description
-            tvDate.text = StoryAdapter.formatDateToString(story.createdAt)
+            tvDate.text = StoryAdapter.formatDateToString(story.createdAt.toString())
         }
+
+        binding.tvLocation.text = LocationConverter.getStringAddress(
+            LocationConverter.toLatlng(story.lat, story.lon),
+            this
+        )
         Glide.with(this)
             .load(story.photoUrl)
             .placeholder(R.drawable.ic_launcher_foreground)

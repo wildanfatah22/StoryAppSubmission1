@@ -1,6 +1,8 @@
 package com.example.storyapp.data.response
 
 import android.os.Parcelable
+import com.example.storyapp.data.local.entity.StoryDetailResponse
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 data class DetailResponse(
@@ -47,3 +49,23 @@ data class DetailStory(
 	var lat: Double,
 	var lon: Double
 ) : Parcelable
+
+data class ResponseLocationStory(
+	@field:SerializedName("error")
+	var error: String,
+
+	@field:SerializedName("message")
+	var message: String,
+
+	@field:SerializedName("listStory")
+	var listStory: List<StoryDetailResponse>
+)
+
+data class ResponsePagingStory(
+	@field:SerializedName("error")
+	var error: String,
+	@field:SerializedName("message")
+	var message: String,
+	@field:SerializedName("listStory")
+	var listStory: List<StoryDetailResponse>
+)

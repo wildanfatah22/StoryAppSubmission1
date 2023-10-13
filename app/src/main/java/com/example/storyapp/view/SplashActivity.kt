@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import com.example.storyapp.data.datastore.UserPreferences
+import com.example.storyapp.data.local.datastore.UserPreferences
 import com.example.storyapp.databinding.ActivitySplashBinding
 import com.example.storyapp.viewmodel.UserAuthViewModel
 import com.example.storyapp.viewmodel.UserAuthViewModelFactory
