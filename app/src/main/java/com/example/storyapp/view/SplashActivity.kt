@@ -22,6 +22,10 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setUpUI()
+    }
+
+    private fun setUpUI() {
         val pref = UserPreferences.getInstance(dataStore)
         val loginViewModel =
             ViewModelProvider(this, UserAuthViewModelFactory(pref))[UserAuthViewModel::class.java]
@@ -45,10 +49,7 @@ class SplashActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
-
-
         }
-
     }
 
     private fun playAnimation() {

@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton(getString(R.string.logout_cancel)) { _, _ ->
                 alert.cancel()
             }
-            .setNegativeButton(getString(R.string.logout)) { _, _ ->
+            .setNegativeButton(getString(R.string.yes)) { _, _ ->
                 logout()
             }
             .show()
@@ -156,6 +156,4 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-
 }

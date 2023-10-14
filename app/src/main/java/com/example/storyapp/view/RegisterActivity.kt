@@ -36,9 +36,18 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
+        setUpUI()
+
+    }
+
+    private fun setUpUI() {
         playAnimation()
         buttonClicked()
+        observeData()
+    }
 
+    private fun observeData() {
         val preferences = UserPreferences.getInstance(dataStore)
         val userAuthViewModel =
             ViewModelProvider(this, UserAuthViewModelFactory(preferences))[UserAuthViewModel::class.java]

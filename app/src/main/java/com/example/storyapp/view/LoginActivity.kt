@@ -38,10 +38,18 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
+        setUpUI()
+    }
+
+    private fun setUpUI() {
         buttonClicked()
         playAnimation()
+        observeData()
+    }
 
+    private fun observeData() {
         val preferences = UserPreferences.getInstance(dataStore)
         val userAuthViewModel =
             ViewModelProvider(this, UserAuthViewModelFactory(preferences))[UserAuthViewModel::class.java]
@@ -69,7 +77,6 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
-
     }
 
     private fun loginResponse(message: String, userAuthViewModel: UserAuthViewModel) {

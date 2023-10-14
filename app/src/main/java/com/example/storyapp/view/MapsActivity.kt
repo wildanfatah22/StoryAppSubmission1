@@ -51,6 +51,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        observeData()
+
+    }
+
+    private fun observeData() {
         val userAuthViewModel =
             ViewModelProvider(this, UserAuthViewModelFactory(pref))[UserAuthViewModel::class.java]
         userAuthViewModel.getToken().observe(this) {

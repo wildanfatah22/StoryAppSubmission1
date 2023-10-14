@@ -19,7 +19,6 @@ class DetailStoryActivity : AppCompatActivity() {
         binding = ActivityDetailStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val story = intent.getParcelableExtra<StoryDetailResponse>(KEY_DATA) as StoryDetailResponse
         setStory(story)
         supportActionBar?.title = getString(R.string.detail_title, story.name)

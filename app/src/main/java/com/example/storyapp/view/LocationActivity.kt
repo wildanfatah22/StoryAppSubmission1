@@ -84,11 +84,9 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
         ) { permissions ->
             when {
                 permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
-                    // Precise location access granted.
                     getMyLastLocation()
                 }
                 permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
-                    // Only approximate location access granted.
                     getMyLastLocation()
                 }
                 else -> {
