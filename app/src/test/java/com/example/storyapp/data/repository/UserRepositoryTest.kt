@@ -16,6 +16,7 @@ import com.example.storyapp.utils.DataDummy.generateDummyNewStories
 import com.example.storyapp.utils.DataDummy.generateDummyRequestLogin
 import com.example.storyapp.utils.DataDummy.generateDummyRequestRegister
 import com.example.storyapp.utils.DataDummy.generateDummyResponseLogin
+import com.example.storyapp.utils.DataDummy.generateDummyStoryEntity
 import com.example.storyapp.utils.MainDispatcherRule
 import com.example.storyapp.utils.getOrAwaitValue
 import com.google.android.gms.maps.model.LatLng
@@ -149,7 +150,7 @@ class UserRepositoryTest{
 
     @Test
     fun `verify getStories function is working`() {
-        val dummyStories = generateDummyNewStories()
+        val dummyStories = generateDummyStoryEntity()
         val expectedStories = MutableLiveData<List<StoryDetailResponse>>()
         expectedStories.value = dummyStories
 
@@ -170,7 +171,7 @@ class UserRepositoryTest{
 
     @Test
     fun `when stories should return the right data and not null`() {
-        val dummyStories = generateDummyNewStories()
+        val dummyStories = generateDummyStoryEntity()
         val expectedStories = MutableLiveData<List<StoryDetailResponse>>()
         expectedStories.value = dummyStories
 

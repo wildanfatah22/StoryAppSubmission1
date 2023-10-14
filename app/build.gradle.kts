@@ -41,6 +41,9 @@ android {
         viewBinding = true
         buildConfig = true
     }
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -84,8 +87,6 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
 
     //TestCoroutineDispatcher
-    testImplementation("org.mockito:mockito-core:5.1.1")
-    testImplementation("org.mockito:mockito-inline:5.1.1")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.9.3")
     testImplementation("io.strikt:strikt-core:0.31.0")
     androidTestImplementation("com.squareup.okhttp3:mockwebserver3:5.0.0-alpha.2")
@@ -104,8 +105,9 @@ dependencies {
     implementation ("com.google.android.gms:play-services-places:17.0.0")
     implementation ("com.google.android.gms:play-services-maps:18.1.0")
 
-
+    //mockito
     testImplementation("org.mockito:mockito-core:5.1.1")
+    testImplementation("org.mockito:mockito-inline:5.1.1")
 
 
 }

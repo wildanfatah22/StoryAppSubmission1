@@ -23,8 +23,11 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mockito
+import org.mockito.junit.MockitoJUnitRunner
 
+@RunWith(MockitoJUnitRunner::class)
 class MainViewModelTest{
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -39,7 +42,6 @@ class MainViewModelTest{
     fun setUp() {
         mainViewModel = Mockito.mock(MainViewModel::class.java)
 
-        System.setProperty("org.mockito.mock.android", "true")
     }
 
     // get story

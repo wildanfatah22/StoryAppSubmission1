@@ -8,22 +8,22 @@ import com.example.storyapp.data.response.RegisterAccount
 
 object DataDummy {
 
-//    fun generateDummyNewEntity(): List<StoryDetailResponse> {
-//        val newsList = ArrayList<StoryDetailResponse>()
-//        for (i in 0..5) {
-//            val stories = StoryDetailResponse(
-//                "Title $i",
-//                "this is name",
-//                "This is description",
-//                "https://dicoding-web-img.sgp1.cdn.digitaloceanspaces.com/original/commons/feature-1-kurikulum-global-3.png",
-//                "2022-02-22T22:22:22Z",
-//                null,
-//                null,
-//            )
-//            newsList.add(stories)
-//        }
-//        return newsList
-//    }
+    fun generateDummyStoryEntity(): List<StoryDetailResponse> {
+        val newsList = ArrayList<StoryDetailResponse>()
+        for (i in 0..5) {
+            val stories = StoryDetailResponse(
+                "Title $i",
+                "this is name",
+                "This is description",
+                "https://dicoding-web-img.sgp1.cdn.digitaloceanspaces.com/original/commons/feature-1-kurikulum-global-3.png",
+                "2022-02-22T22:22:22Z",
+                null,
+                null,
+            )
+            newsList.add(stories)
+        }
+        return newsList
+    }
 
     fun generateDummyNewStories(): List<StoryDetailResponse> {
         val newStoryList = ArrayList<StoryDetailResponse>()

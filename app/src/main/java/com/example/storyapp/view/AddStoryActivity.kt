@@ -60,11 +60,19 @@ class AddStoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        buttonClicked()
 
         supportActionBar?.title = resources.getString(R.string.post_user)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        setUpUI()
+    }
+
+    private fun setUpUI(){
+        buttonClicked()
+        observeData()
+    }
+
+    private fun observeData() {
         val preferences = UserPreferences.getInstance(dataStore)
         val userLoginViewModel =
             ViewModelProvider(this, UserAuthViewModelFactory(preferences))[UserAuthViewModel::class.java]
@@ -84,8 +92,8 @@ class AddStoryActivity : AppCompatActivity() {
         addStoryViewModel.isLoading.observe(this) {
             showLoading(it)
         }
-
     }
+
 
     private val resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

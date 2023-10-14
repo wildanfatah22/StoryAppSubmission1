@@ -38,4 +38,17 @@
     <string name="error_message">Pesan error: %1$s</string>
     <string name="registration_success">Yeay, akun berhasil dibuat</string>
     <string name="post_user">Buat cerita baru</string>
+    <string name="location">Lokasi Anda</string>
+    <string name="my_location">Gunakan lokasi saya</string>
+    <string name="pick_location">Pilih Lokasi</string>
+    <string name="click_map">Klik Peta untuk Memilih Lokasi</string>
+    <string name="retro_maps">Peta Gaya Retro</string>
+    <string name="standard_maps">Peta Standar</string>
+    <string name="start_point">Poin Mulai</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="use_location">Gunakan lokasi ini?</string>
+    <string name="location_not_found">Lokasi tidak ditemukan!</string>
+    <string name="see_maps">Lihat peta</string>
+    <string name="try_again">Coba lagi</string>
 </resources>
