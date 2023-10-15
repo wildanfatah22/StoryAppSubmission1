@@ -74,6 +74,8 @@ class MainViewModelTest{
         Assert.assertNotNull(differ.snapshot())
         assertEquals(dummyStory.size, differ.snapshot().size)
         assertEquals(dummyStory[0].name, differ.snapshot()[0]?.name)
+        // Perbaikan: Memeriksa seluruh properti pada objek pertama dalam data
+        assertEquals(dummyStory[0], differ.snapshot()[0])
     }
 
     @OptIn(ExperimentalPagingApi::class, ExperimentalCoroutinesApi::class)
